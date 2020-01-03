@@ -10,7 +10,7 @@
       },
       type: "text",
       range: [],
-      background: "linear-gradient(90deg, red 20%, pink 20%)"
+      background: "linear-gradient(120deg, red 20%, pink 20%)"
     },
     {
       name: "Tip",
@@ -20,7 +20,7 @@
       },
       type: "range",
       range: [1, 30],
-      background: "linear-gradient(90deg, orange 20%, #ffed4b 20%)"
+      background: "linear-gradient(120deg, orange 20%, yellow 20%)"
     },
     {
       name: "Split",
@@ -30,7 +30,7 @@
       },
       type: "range",
       range: [1, 10],
-      background: "linear-gradient(90deg, blue 20%, green 20%)"
+      background: "linear-gradient(120deg, seagreen 20%, lightblue 20%)"
     }
   ];
   $: tip = fields[0].value * (fields[1].value / 100);
@@ -117,9 +117,11 @@
   }
   .input__fields {
     position: absolute;
-    left: 2em;
-    width: 10%;
+    left: 10%;
     font-size: 1.5em;
+    height: 20.1%;
+    width: 10%;    
+    background: linear-gradient(180deg, green 60%, red 20%);
   }
   .input__unit {
     position: relative;
@@ -133,8 +135,8 @@
     border: 3px solid red;
   }
   .total__block {
-    width: 60%;
     background-color: red;
+    width: 60%;
     margin: auto;
   }
   .total__text {
