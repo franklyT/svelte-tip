@@ -9,7 +9,8 @@
         return currency[0];
       },
       type: "text",
-      range: []
+      range: [],
+      background: "linear-gradient(90deg, red 20%, pink 20%)"
     },
     {
       name: "Tip",
@@ -18,7 +19,8 @@
         return `${fields[1].value}%`;
       },
       type: "range",
-      range: [1, 30]
+      range: [1, 30],
+      background: "linear-gradient(90deg, orange 20%, #ffed4b 20%)"
     },
     {
       name: "Split",
@@ -27,7 +29,8 @@
         return `${fields[2].value}`;
       },
       type: "range",
-      range: [1, 10]
+      range: [1, 10],
+      background: "linear-gradient(90deg, blue 20%, green 20%)"
     }
   ];
   $: tip = fields[0].value * (fields[1].value / 100);
@@ -59,11 +62,17 @@
 
 <style type="text/scss">
   :global(body) {
-    background-color: #373532;
+    background-color: white;
+    padding: 0;
   }
   .wrapper {
     text-align: center;
-    color: white;
+    color: black;
+  }
+  .input__block {
+    width: 60%;
+    padding-top: 5%;
+    margin: auto;
   }
   .input__unit {
     display: inline-block;
@@ -72,11 +81,21 @@
     width: fit-content;
     margin-right: 0.3em;
   }
+  .input__name {
+    display: inline-block;
+  }
   .input__invalid {
     border: 3px solid red;
   }
+  .total__block {
+    width: 60%;
+    background-color: red;
+    margin: auto;
+  }
   .total__text {
     font-size: 1em;
+    display: inline-block;
+    width: 20%;
   }
   .currency__selector {
     display: block;
@@ -87,38 +106,38 @@
 <Header />
 <div class="wrapper">
   {#each fields as field, i}
-    <p>{field.name}</p>
-    <p class="input__unit">{field.unit}</p>
-    {#if i === 0 && !validate}
-      <input
-        id={i}
-        value={field.value}
-        on:input={() => {
-          handleChange(event.target);
-        }}
-        class="input__invalid"
-        type={field.type} />
-    {:else}
-      <input
-        id={i}
-        value={field.value}
-        on:input={() => {
-          handleChange(event.target);
-        }}
-        type={field.type}
-        min={field.range[0]}
-        max={field.range[1]} />
-    {/if}
+    <div class="input__block" style={`background: ${field.background}`}>
+      <p class="input__name">{field.name}</p>
+      <p class="input__unit">{field.unit}</p>
+      {#if i === 0 && !validate}
+        <input
+          id={i}
+          value={field.value}
+          on:input={() => {
+            handleChange(event.target);
+          }}
+          class="input__invalid"
+          type={field.type} />
+      {:else}
+        <input
+          id={i}
+          value={field.value}
+          on:input={() => {
+            handleChange(event.target);
+          }}
+          type={field.type}
+          min={field.range[0]}
+          max={field.range[1]} />
+      {/if}
+    </div>
   {/each}
   {#if validate}
-    <br />
-    Tip
-    <p class="total__text">{currency[0]} {tipRound}</p>
-    <br />
-    Total
-    <br />
-    Per Person
-    <p class="total__text">{currency[0]} {totalRound}</p>
+    <div class="total__block">
+      Tip
+      <p class="total__text">{currency[0]} {tipRound}</p>
+      Total Per Person
+      <p class="total__text">{currency[0]} {totalRound}</p>
+    </div>
   {/if}
   <!-- hacky onChange forces DOM update-->
   <select
