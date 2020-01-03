@@ -1,3 +1,3 @@
 <svelte:head>
-<title>Tip Calculator</title>
+    <title>Tip Calculator</title>
 </svelte:head>
