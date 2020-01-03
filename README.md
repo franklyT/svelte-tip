@@ -1,3 +1,3 @@
 # svelte-tip
 
-self-intro to svelte with barebones tip calculator
+self-intro to svelte with tip calculator
