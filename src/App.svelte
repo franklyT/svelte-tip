@@ -41,7 +41,7 @@
   // default USD
   $: currency = ["$", "."];
 
-  let timer;
+  const timer;
   export function handleChange(elm) {
     fields[elm.id].value = elm.value;
     clearTimeout(timer);
