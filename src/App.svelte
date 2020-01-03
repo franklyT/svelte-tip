@@ -1,5 +1,6 @@
 <script>
-  import Metadata from "./Metadata.svelte";
+  import Header from "./Header.svelte";
+
   const fields = [
     {
       name: "Bill",
@@ -30,26 +31,25 @@
     }
   ];
   $: tip = fields[0].value * (fields[1].value / 100);
-  $: total = rounder(
-    String((Number(tip) + Number(fields[0].value)) / Number(fields[2].value)),
-    // to decimal place
-    2
+  $: total = String(
+    (Number(tip) + Number(fields[0].value)) / Number(fields[2].value)
   );
+  $: totalRound = rounder(String(total), 2, currency);
+  $: tipRound = rounder(String(tip), 2, currency);
+
   $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
   // default USD
   $: currency = ["$", "."];
 
-  // deals with Svelte not auto focusing updated input component
-  // might as well also two-way bind value this way
   let timer;
-  function handleChange(elm) {
+  export function handleChange(elm) {
     fields[elm.id].value = elm.value;
     clearTimeout(timer);
     timer = setTimeout(() => {
       document.getElementById(elm.id).focus();
     }, 50);
   }
-  function rounder(value, decimalPlace) {
+  export function rounder(value, decimalPlace) {
     let matched = new RegExp(`\\.`, "g");
     return String(
       value.match(matched) ? Number(value).toFixed(decimalPlace) : Number(value)
@@ -84,7 +84,7 @@
   }
 </style>
 
-<Metadata />
+<Header />
 <div class="wrapper">
   {#each fields as field, i}
     <p>{field.name}</p>
@@ -93,14 +93,18 @@
       <input
         id={i}
         value={field.value}
-        on:input={() => handleChange(event.target)}
+        on:input={() => {
+          handleChange(event.target);
+        }}
         class="input__invalid"
         type={field.type} />
     {:else}
       <input
         id={i}
         value={field.value}
-        on:input={() => handleChange(event.target)}
+        on:input={() => {
+          handleChange(event.target);
+        }}
         type={field.type}
         min={field.range[0]}
         max={field.range[1]} />
@@ -108,10 +112,13 @@
   {/each}
   {#if validate}
     <br />
+    Tip
+    <p class="total__text">{currency[0]} {tipRound}</p>
+    <br />
     Total
     <br />
     Per Person
-    <p class="total__text">{currency[0]} {total}</p>
+    <p class="total__text">{currency[0]} {totalRound}</p>
   {/if}
   <!-- hacky onChange forces DOM update-->
   <select
