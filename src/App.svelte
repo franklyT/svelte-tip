@@ -131,14 +131,18 @@
       {/if}
     </div>
   {/each}
-  {#if validate}
-    <div class="total__block">
-      Tip
+  <div class="total__block">
+    <p class="total__text">Tip Total</p>
+    {#if validate}
       <p class="total__text">{currency[0]} {tipRound}</p>
-      Total Per Person
+    {/if}
+
+    <p class="total__text">Total Per Person</p>
+    {#if validate}
       <p class="total__text">{currency[0]} {totalRound}</p>
-    </div>
-  {/if}
+    {/if}
+  </div>
+
   <!-- hacky onChange forces DOM update-->
   <select
     class="currency__selector"
