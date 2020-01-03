@@ -75,14 +75,12 @@
     margin: auto;
   }
   .input__unit {
-    display: inline-block;
     position: relative;
-    height: 1em;
-    width: fit-content;
     margin-right: 0.3em;
+    text-align: left;
   }
   .input__name {
-    display: inline-block;
+    text-align: left;
   }
   .input__invalid {
     border: 3px solid red;
@@ -95,7 +93,7 @@
   .total__text {
     font-size: 1em;
     display: inline-block;
-    width: 20%;
+    width: 30%;
   }
   .currency__selector {
     display: block;
@@ -107,8 +105,10 @@
 <div class="wrapper">
   {#each fields as field, i}
     <div class="input__block" style={`background: ${field.background}`}>
-      <p class="input__name">{field.name}</p>
-      <p class="input__unit">{field.unit}</p>
+      <p class="input__name">
+        {field.name}
+        <span class="input__unit">{field.unit}</span>
+      </p>
       {#if i === 0 && !validate}
         <input
           id={i}
@@ -132,17 +132,14 @@
     </div>
   {/each}
   <div class="total__block">
-    <p class="total__text">Tip Total</p>
     {#if validate}
-      <p class="total__text">{currency[0]} {tipRound}</p>
-    {/if}
-
-    <p class="total__text">Total Per Person</p>
-    {#if validate}
-      <p class="total__text">{currency[0]} {totalRound}</p>
+      <p class="total__text">Tip Total {currency[0]} {tipRound}</p>
+      <p class="total__text">Total Per Person {currency[0]} {totalRound}</p>
+    {:else}
+      <p class="total__text">Tip Total</p>
+      <p class="total__text">Total Per Person</p>
     {/if}
   </div>
-
   <!-- hacky onChange forces DOM update-->
   <select
     class="currency__selector"
