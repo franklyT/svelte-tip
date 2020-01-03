@@ -74,13 +74,18 @@
     padding-top: 5%;
     margin: auto;
   }
+  .input__fields {
+    left: 2em;
+    width: 20%;
+    font-size: 1.5em;
+  }
   .input__unit {
     position: relative;
     margin-right: 0.3em;
     text-align: left;
   }
   .input__name {
-    text-align: left;
+    text-align: center;
   }
   .input__invalid {
     border: 3px solid red;
@@ -105,10 +110,12 @@
 <div class="wrapper">
   {#each fields as field, i}
     <div class="input__block" style={`background: ${field.background}`}>
+      <div class="input__fields">
       <p class="input__name">
         {field.name}
         <span class="input__unit">{field.unit}</span>
       </p>
+      </div>
       {#if i === 0 && !validate}
         <input
           id={i}
