@@ -119,7 +119,7 @@
     position: absolute;
     left: 10%;
     font-size: 1.5em;
-    height: 20.1%;
+    height: 5.55em;
     width: 10%;    
     background: linear-gradient(180deg, green 60%, red 20%);
   }
@@ -145,8 +145,10 @@
     width: 30%;
   }
   .currency__selector {
-    display: block;
-    margin: auto;
+    display: inline-block;
+    position: absolute;
+    left: 12%;
+    top: 15.5em;
   }
 </style>
 
@@ -183,6 +185,14 @@
       {/if}
     </div>
   {/each}
+    <!-- hacky onChange forces DOM update-->
+  <select
+    class="currency__selector"
+    bind:value={currency}
+    on:change={() => (fields = fields)}>
+    <option value={['$', '.']}>USD</option>
+    <option value={['€', ',']}>Euro</option>
+  </select>
   <div class="total__block">
     {#if validate}
       <p class="total__text">Tip Total {currency[0]} {tipRound}</p>
@@ -192,12 +202,4 @@
       <p class="total__text">Total Per Person</p>
     {/if}
   </div>
-  <!-- hacky onChange forces DOM update-->
-  <select
-    class="currency__selector"
-    bind:value={currency}
-    on:change={() => (fields = fields)}>
-    <option value={['$', '.']}>USD</option>
-    <option value={['€', ',']}>Euro</option>
-  </select>
 </div>
