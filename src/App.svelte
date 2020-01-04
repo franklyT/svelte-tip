@@ -98,7 +98,8 @@
     text-align: left;
   }
   .input__name {
-    text-align: center;
+    text-align: right;
+    width: 5em;
   }
   .input__invalid {
     border: 3px solid red;
@@ -109,15 +110,15 @@
     margin-left: 10%;
   }
   .total__text {
-    font-size: 1em;
+    font-size: 1.2em;
     display: inline-block;
-    width: 30%;
+    width: 40%;
   }
   .currency__selector {
     display: inline-block;
     position: absolute;
     left: 12%;
-    top: 15.5em;
+    top: 15.8em;
   }
 </style>
 
