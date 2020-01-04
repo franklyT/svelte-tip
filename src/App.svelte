@@ -11,7 +11,7 @@
       },
       type: "text",
       range: [],
-      background: "linear-gradient(120deg, red 20%, pink 20%)"
+      background: ["red", "linear-gradient(120deg, red 20%, pink 20%)"]
     },
     {
       name: "Tip",
@@ -21,7 +21,7 @@
       },
       type: "range",
       range: [1, 30],
-      background: "linear-gradient(120deg, orange 20%, yellow 20%)"
+      background: ["orange", "linear-gradient(120deg, orange 20%, yellow 20%)"]
     },
     {
       name: "Split",
@@ -31,7 +31,10 @@
       },
       type: "range",
       range: [1, 10],
-      background: "linear-gradient(120deg, seagreen 20%, lightblue 20%)"
+      background: [
+        "seagreen",
+        "linear-gradient(120deg, seagreen 20%, lightblue 20%)"
+      ]
     }
   ];
   $: tip = fields[0].value * (fields[1].value / 100);
@@ -80,8 +83,14 @@
     left: 10%;
     font-size: 1.5em;
     height: 5.55em;
-    width: 10%;    
-    background: linear-gradient(180deg, green 60%, red 20%);
+    width: 10%;
+    background: linear-gradient(
+      to bottom,
+      red 60%,
+      green 30%,
+      green 60%,
+      blue 60%
+    );
   }
   .input__unit {
     position: relative;
@@ -115,8 +124,8 @@
 <Header />
 <div class="wrapper">
   {#each fields as field, i}
-    <div class="input__block" style={`background: ${field.background}`}>
-      <div class="input__fields">
+    <div class="input__block" style={`background: ${field.background[1]}`}>
+      <div class="input__fields" style={`background: ${field.background[0]}`}>
         <p class="input__name">
           {field.name}
           <span class="input__unit">{field.unit}</span>
@@ -145,7 +154,7 @@
       {/if}
     </div>
   {/each}
-    <!-- hacky onChange forces DOM update-->
+  <!-- hacky onChange forces DOM update-->
   <select
     class="currency__selector"
     bind:value={currency}
