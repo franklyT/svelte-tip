@@ -2,41 +2,6 @@
   import Header from "./Helpers/Header.svelte";
   import GlobalStyle from "./Helpers/GlobalStyle.svelte";
 
-  const fields = [
-    {
-      name: "Bill",
-      value: 0,
-      get unit() {
-        return currency[0];
-      },
-      type: "text",
-      range: [],
-      background: ["red", "linear-gradient(120deg, red 20%, pink 20%)"]
-    },
-    {
-      name: "Tip",
-      value: 15,
-      get unit() {
-        return `${fields[1].value}%`;
-      },
-      type: "range",
-      range: [1, 30],
-      background: ["orange", "linear-gradient(120deg, orange 20%, yellow 20%)"]
-    },
-    {
-      name: "Split",
-      value: 1,
-      get unit() {
-        return `${fields[2].value}`;
-      },
-      type: "range",
-      range: [1, 10],
-      background: [
-        "seagreen",
-        "linear-gradient(120deg, seagreen 20%, lightblue 20%)"
-      ]
-    }
-  ];
   $: tip = fields[0].value * (fields[1].value / 100);
   $: total = String(
     (Number(tip) + Number(fields[0].value)) / Number(fields[2].value)
@@ -46,7 +11,7 @@
 
   $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
   // default USD
-  $: currency = ["$", "."];
+  let currency = ["$", "."];
 
   let timer;
   function handleChange(elm) {
@@ -62,63 +27,46 @@
       value.match(matched) ? Number(value).toFixed(decimalPlace) : Number(value)
     ).replace(".", currency[1]);
   }
+  class field2 {
+    constructor(name, value, unit, type, range, background) {
+      this.name = name;
+      this.value = value;
+      this.unit = unit;
+      this.type = type;
+      this.range = range;
+      this.background = background;
+    }
+  }
+
+  let bill = new field2(
+    `Bill ${currency[0]}`,
+    0,
+    "",
+    "text",
+    [],
+    ["red", "linear-gradient(120deg, red 20%, pink 20%)"]
+  );
+  let tip = new field2(
+    "Tip",
+    15,
+    `%`,
+    "range",
+    [1, 30],
+    ["orange", "linear-gradient(120deg, orange 20%, yellow 20%)"]
+  );
+  let split = new field2(
+    "Split",
+    1,
+    "",
+    "range",
+    [1, 10],
+    ["seagreen", "linear-gradient(120deg, seagreen 20%, lightblue 20%)"]
+  );
+  let fields = [bill, tip, split];
 </script>
 
 <style type="text/scss">
   @import "bulma/bulma.sass";
-
- /* .wrapper {
-    text-align: center;
-    color: black;
-  }
-  .inputs {
-    margin-top: 1.5em;
-  }
-  .input__block {
-    display: block;
-    width: 60%;
-    height: 5em;
-    margin: auto;
-  }
-  .input__fields {
-    position: absolute;
-    left: 10%;
-    font-size: 1.5em;
-    height: 3.32em;
-    width: 10%;
-  }
-  .input__unit {
-    position: relative;
-    margin-right: 0.3em;
-    text-align: left;
-    font-size: 1em;
-  }
-  .input__name {
-    text-align: right;
-    width: 5em;
-    font-size: 1em;
-  }
-  .input__invalid {
-    border: 3px solid red;
-  }
-  .total__block {
-    background-color: red;
-    width: 70%;
-    margin-left: 10%;
-  }
-  .total__text {
-    font-size: 1.2em;
-    display: inline-block;
-    width: 40%;
-  }
-  .currency__selector {
-    display: inline-block;
-    position: absolute;
-    left: 12%;
-    top: 15.8em;
-    font-size: 1em;
-  }
-  */
 </style>
 
 <Header />
@@ -128,7 +76,7 @@
       <div class="input__fields" style={`background: ${field.background[0]}`}>
         <p class="input__name">
           {field.name}
-          <span class="input__unit">{field.unit}</span>
+          <span class="input__unit">{field.value}{field.unit}</span>
         </p>
       </div>
       {#if i === 0 && !validate}
