@@ -1,4 +1,9 @@
- <style>
+<style>
+  :global(html) {
+    width: 100%;
+    height: 50vh;
+    margin-top: 10em;
+  }
   :global(body) {
     background-color: white;
     padding: 0;
@@ -39,4 +44,4 @@
   :global(input[type="range"]:focus::-webkit-slider-runnable-track) {
     background: white;
   }
-</style> 
+</style>
