@@ -82,7 +82,7 @@
     position: absolute;
     left: 10%;
     font-size: 1.5em;
-    height: 5.55em;
+    height: 3.32em;
     width: 10%;
     background: linear-gradient(
       to bottom,
@@ -105,8 +105,8 @@
   }
   .total__block {
     background-color: red;
-    width: 60%;
-    margin: auto;
+    width: 70%;
+    margin-left: 10%;
   }
   .total__text {
     font-size: 1em;
