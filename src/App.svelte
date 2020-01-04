@@ -96,10 +96,12 @@
     position: relative;
     margin-right: 0.3em;
     text-align: left;
+    font-size: 1em;
   }
   .input__name {
     text-align: right;
     width: 5em;
+    font-size: 1em;
   }
   .input__invalid {
     border: 3px solid red;
@@ -119,6 +121,7 @@
     position: absolute;
     left: 12%;
     top: 15.8em;
+    font-size: 1em;
   }
 </style>
 
