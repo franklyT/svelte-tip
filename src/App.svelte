@@ -84,13 +84,6 @@
     font-size: 1.5em;
     height: 3.32em;
     width: 10%;
-    background: linear-gradient(
-      to bottom,
-      red 60%,
-      green 30%,
-      green 60%,
-      blue 60%
-    );
   }
   .input__unit {
     position: relative;
