@@ -2,18 +2,6 @@
   import Header from "./Helpers/Header.svelte";
   import GlobalStyle from "./Helpers/GlobalStyle.svelte";
 
-  $: tip = fields[0].value * (fields[1].value / 100);
-  $: total = String(
-    (Number(tip) + Number(fields[0].value)) / Number(fields[2].value)
-  );
-  $: totalRound = rounder(String(total), 2);
-  $: tipRound = rounder(String(tip), 2);
-
-  $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
-  // default USD
-  let currency = ["$", "."];
-
-  let timer;
   function handleChange(elm) {
     fields[elm.id].value = elm.value;
     clearTimeout(timer);
@@ -27,6 +15,19 @@
       value.match(matched) ? Number(value).toFixed(decimalPlace) : Number(value)
     ).replace(".", currency[1]);
   }
+
+  $: tip = fields[0].value * (fields[1].value / 100);
+  $: total = String(
+    (Number(tip) + Number(fields[0].value)) / Number(fields[2].value)
+  );
+  $: totalRound = rounder(String(total), 2);
+  $: tipRound = rounder(String(tip), 2);
+
+  $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
+  // default USD
+  let currency = ["$", "."];
+  let timer;
+
   class CalculatorField {
     constructor(name, value, unit, type, range, background) {
       this.name = name;
