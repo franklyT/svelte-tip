@@ -41,8 +41,8 @@
   $: total = String(
     (Number(tip) + Number(fields[0].value)) / Number(fields[2].value)
   );
-  $: totalRound = rounder(String(total), 2, currency);
-  $: tipRound = rounder(String(tip), 2, currency);
+  $: totalRound = rounder(String(total), 2);
+  $: tipRound = rounder(String(tip), 2);
 
   $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
   // default USD
