@@ -65,6 +65,8 @@
 </script>
 
 <style type="text/scss">
+  @import "bulma/bulma.sass";
+
   .wrapper {
     text-align: center;
     color: black;
