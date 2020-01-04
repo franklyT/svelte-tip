@@ -27,7 +27,7 @@
       value.match(matched) ? Number(value).toFixed(decimalPlace) : Number(value)
     ).replace(".", currency[1]);
   }
-  class field2 {
+  class CalculatorField {
     constructor(name, value, unit, type, range, background) {
       this.name = name;
       this.value = value;
@@ -37,8 +37,7 @@
       this.background = background;
     }
   }
-
-  let bill = new field2(
+  let bill = new CalculatorField(
     `Bill ${currency[0]}`,
     0,
     "",
@@ -46,7 +45,7 @@
     [],
     ["red", "linear-gradient(120deg, red 20%, pink 20%)"]
   );
-  let tip = new field2(
+  let tip = new CalculatorField(
     "Tip",
     15,
     `%`,
@@ -54,7 +53,7 @@
     [1, 30],
     ["orange", "linear-gradient(120deg, orange 20%, yellow 20%)"]
   );
-  let split = new field2(
+  let split = new CalculatorField(
     "Split",
     1,
     "",
@@ -62,7 +61,7 @@
     [1, 10],
     ["seagreen", "linear-gradient(120deg, seagreen 20%, lightblue 20%)"]
   );
-  let fields = [bill, tip, split];
+  const fields = [bill, tip, split];
 </script>
 
 <style type="text/scss">
