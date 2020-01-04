@@ -5,7 +5,7 @@
     top: 10vh;
     right: -5vw;
   }
-  :global(input[type="range"]) {
+  /* :global(input[type="range"]) {
     -webkit-appearance: none;
     width: 50%;
     height: fit-content;
@@ -41,4 +41,5 @@
   :global(input[type="range"]:focus::-webkit-slider-runnable-track) {
     background: white;
   }
+  */
 </style>
