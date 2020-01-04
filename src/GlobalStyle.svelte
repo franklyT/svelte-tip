@@ -1,12 +1,10 @@
 <style>
-  :global(html) {
-    width: 100%;
-    height: 50vh;
-    margin-top: 10em;
-  }
+
   :global(body) {
     background-color: white;
     padding: 0;
+    top: 10vh;
+    right: -5vw;
   }
   :global(input[type="range"]) {
     -webkit-appearance: none;
