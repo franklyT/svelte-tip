@@ -1,6 +1,6 @@
 <script>
-  import Header from "./Header.svelte";
-  import GlobalStyle from "./GlobalStyle.svelte";
+  import Header from "./Helpers/Header.svelte";
+  import GlobalStyle from "./Helpers/GlobalStyle.svelte";
 
   const fields = [
     {
@@ -67,7 +67,7 @@
 <style type="text/scss">
   @import "bulma/bulma.sass";
 
-  .wrapper {
+ /* .wrapper {
     text-align: center;
     color: black;
   }
@@ -118,6 +118,7 @@
     top: 15.8em;
     font-size: 1em;
   }
+  */
 </style>
 
 <Header />

@@ -1,5 +1,4 @@
 <style>
-
   :global(body) {
     background-color: white;
     padding: 0;
@@ -22,7 +21,7 @@
     width: 100%;
     height: 12.8px;
     cursor: pointer;
-    animate: 0.2s;
+    transition: 0.2s;
     box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
     background: white;
     border-radius: 25px;
