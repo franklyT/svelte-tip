@@ -49,14 +49,14 @@
   $: currency = ["$", "."];
 
   let timer;
-  export function handleChange(elm) {
+  function handleChange(elm) {
     fields[elm.id].value = elm.value;
     clearTimeout(timer);
     timer = setTimeout(() => {
       document.getElementById(elm.id).focus();
     }, 50);
   }
-  export function rounder(value, decimalPlace) {
+  function rounder(value, decimalPlace) {
     let matched = new RegExp(`\\.`, "g");
     return String(
       value.match(matched) ? Number(value).toFixed(decimalPlace) : Number(value)
