@@ -1,9 +1,26 @@
 <style>
+  :global(html) {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+  }
   :global(body) {
     background-color: white;
     padding: 0;
     top: 10vh;
     right: -5vw;
+  }
+
+  :global(input[type="text"]) {
+    width: 7em;
+    border-radius: 0.8em;
+    text-align: center;
+  }
+
+  :global(input[type="text"]:focus) {
+    outline: none;
   }
   /* :global(input[type="range"]) {
     -webkit-appearance: none;
