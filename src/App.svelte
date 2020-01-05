@@ -24,9 +24,9 @@
   $: tipRound = rounder(String(tip), 2);
 
   $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
-  // default USD
-  let currency = ["$", "."];
   let timer;
+  let currency = ["$", "."];
+  const fields = [];
 
   class CalculatorField {
     constructor(name, value, unit, type, range, background) {
@@ -38,31 +38,36 @@
       this.background = background;
     }
   }
-  let bill = new CalculatorField(
-    `Bill ${currency[0]}`,
-    0,
-    "",
-    "text",
-    [],
-    ["red", "linear-gradient(120deg, red 20%, pink 20%)"]
+  let bill = fields.push(
+    new CalculatorField(
+      `Bill ${currency[0]}`,
+      0,
+      "",
+      "text",
+      [],
+      ["red", "linear-gradient(120deg, red 20%, pink 20%)"]
+    )
   );
-  let tip = new CalculatorField(
-    "Tip",
-    15,
-    `%`,
-    "range",
-    [1, 30],
-    ["orange", "linear-gradient(120deg, orange 20%, yellow 20%)"]
+  let tip = fields.push(
+    new CalculatorField(
+      "Tip",
+      15,
+      `%`,
+      "range",
+      [1, 30],
+      ["orange", "linear-gradient(120deg, orange 20%, yellow 20%)"]
+    )
   );
-  let split = new CalculatorField(
-    "Split",
-    1,
-    "",
-    "range",
-    [1, 10],
-    ["seagreen", "linear-gradient(120deg, seagreen 20%, lightblue 20%)"]
+  let split = fields.push(
+    new CalculatorField(
+      "Split",
+      1,
+      "",
+      "range",
+      [1, 10],
+      ["seagreen", "linear-gradient(120deg, seagreen 20%, lightblue 20%)"]
+    )
   );
-  const fields = [bill, tip, split];
 </script>
 
 <style type="text/scss">
@@ -70,13 +75,14 @@
 </style>
 
 <Header />
-<div class="wrapper">
+
+<div>
   {#each fields as field, i}
-    <div class="input__block" style={`background: ${field.background[1]}`}>
-      <div class="input__fields" style={`background: ${field.background[0]}`}>
-        <p class="input__name">
+    <div style={`background: ${field.background[1]}`}>
+      <div style={`background: ${field.background[0]}`}>
+        <p>
           {field.name}
-          <span class="input__unit">{field.value}{field.unit}</span>
+          <span>{field.value}{field.unit}</span>
         </p>
       </div>
       {#if i === 0 && !validate}
@@ -86,11 +92,9 @@
           on:input={() => {
             handleChange(event.target);
           }}
-          class="inputs input__invalid"
           type={field.type} />
       {:else}
         <input
-          class="inputs"
           id={i}
           value={field.value}
           on:input={() => {
@@ -103,20 +107,17 @@
     </div>
   {/each}
   <!-- hacky onChange forces DOM update-->
-  <select
-    class="currency__selector"
-    bind:value={currency}
-    on:change={() => (fields = fields)}>
+  <select bind:value={currency} on:change={() => (fields = fields)}>
     <option value={['$', '.']}>USD</option>
     <option value={['€', ',']}>Euro</option>
   </select>
-  <div class="total__block">
+  <div>
     {#if validate}
-      <p class="total__text">Tip Total {currency[0]} {tipRound}</p>
-      <p class="total__text">Total Per Person {currency[0]} {totalRound}</p>
+      <p>Tip Total {currency[0]} {tipRound}</p>
+      <p>Total Per Person {currency[0]} {totalRound}</p>
     {:else}
-      <p class="total__text">Tip Total</p>
-      <p class="total__text">Total Per Person</p>
+      <p>Tip Total</p>
+      <p>Total Per Person</p>
     {/if}
   </div>
 </div>
