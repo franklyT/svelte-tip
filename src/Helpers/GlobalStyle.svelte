@@ -17,6 +17,8 @@
     width: 7em;
     border-radius: 0.8em;
     text-align: center;
+    -webkit-text-stroke-width: 0px;
+    -webkit-text-stroke-color: none;
   }
 
   :global(input[type="text"]:focus) {

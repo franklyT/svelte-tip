@@ -131,7 +131,8 @@
         class="column is-one-fifth"
         style={`width: fit-content;`}
         bind:value={currency}
-        on:change={() => (fields = fields)}>
+        on:change={()=> {fields[0].name = `Bill ${currency[0]}`}}
+      >
         <option value={['$', '.']}>USD</option>
         <option value={['€', ',']}>Euro</option>
       </select>
