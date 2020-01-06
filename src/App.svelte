@@ -26,8 +26,6 @@
   $: validate = fields[0].value > 0 && fields[0].value[0] != 0;
   let timer;
   let currency = ["$", "."];
-  const fields = [];
-
   class CalculatorField {
     constructor(name, value, unit, type, range, background) {
       this.name = name;
@@ -38,36 +36,31 @@
       this.background = background;
     }
   }
-  let bill = fields.push(
-    new CalculatorField(
-      `Bill ${currency[0]}`,
-      0,
-      "",
-      "text",
-      [],
-      ["red", "linear-gradient(120deg, #f44336 20%, #ff7961 20%)"]
-    )
+  let bill = new CalculatorField(
+    `Bill ${currency[0]}`,
+    0,
+    "",
+    "text",
+    [],
+    ["red", "linear-gradient(120deg, #f44336 20%, #ff7961 20%)"]
   );
-  let tip = fields.push(
-    new CalculatorField(
-      "Tip",
-      15,
-      `%`,
-      "range",
-      [1, 30],
-      ["orange", "linear-gradient(120deg, #ffb74d 20%, #ffe97d 20%)"]
-    )
+  let tip = new CalculatorField(
+    "Tip",
+    15,
+    `%`,
+    "range",
+    [1, 30],
+    ["orange", "linear-gradient(120deg, #ffb74d 20%, #ffe97d 20%)"]
   );
-  let split = fields.push(
-    new CalculatorField(
-      "Split",
-      1,
-      "",
-      "range",
-      [1, 10],
-      ["seagreen", "linear-gradient(120deg, #7e57c2 20%, #b085f5 20%)"]
-    )
+  let split = new CalculatorField(
+    "Split",
+    1,
+    "",
+    "range",
+    [1, 10],
+    ["seagreen", "linear-gradient(120deg, #7e57c2 20%, #b085f5 20%)"]
   );
+  const fields = [bill, tip, split];
 </script>
 
 <style type="text/scss">
@@ -77,7 +70,9 @@
 <Header />
 <section>
   <div class="container">
-    <div class="columns is-mobile is-multiline is-centered" style={`text-align: center;`}>
+    <div
+      class="columns is-mobile is-multiline is-centered"
+      style={`text-align: center;`}>
       {#each fields as field, i}
         <div class="column is-one-third" />
         <div
@@ -115,7 +110,9 @@
       {/each}
       <!-- hacky onChange forces DOM update-->
       <div class="column is-one-third" />
-      <div class="column is-one-third" style={`font-size: 1.5em; font-weight: 500; padding-bottom: 0;`}>
+      <div
+        class="column is-one-third"
+        style={`font-size: 1.5em; font-weight: 500; padding-bottom: 0;`}>
         {#if validate}
           <p>Tip Total {currency[0]} {tipRound}</p>
           <p>Total Per Person {currency[0]} {totalRound}</p>
@@ -131,8 +128,9 @@
         class="column is-one-fifth"
         style={`width: fit-content;`}
         bind:value={currency}
-        on:change={()=> {fields[0].name = `Bill ${currency[0]}`}}
-      >
+        on:change={() => {
+          fields[0].name = `Bill ${currency[0]}`;
+        }}>
         <option value={['$', '.']}>USD</option>
         <option value={['€', ',']}>Euro</option>
       </select>
